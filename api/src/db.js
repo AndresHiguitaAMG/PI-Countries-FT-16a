@@ -33,6 +33,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Pokemon } = sequelize.models;
 
 // Aca vendrian las relaciones
+Country.belongsToMany(Activity,{through:"country_activity"});
+Activity.belongsToMany(Country,{through:"country_activity"});
 // Product.hasMany(Reviews);
 
 module.exports = {
