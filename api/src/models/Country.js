@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('country', {
-    alpha3Code:{  
+    id: {  
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -18,27 +18,36 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      // defaultValue: '---',
     },
     flag: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    region: {
+    continent: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      // defaultValue: '---',
+    },
+    subregión: {
+      type: DataTypes.STRING,
+      // defaultValue: '---',
     },
     capital: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    subregion: {
-      type: DataTypes.STRING
-    },
+              type: DataTypes.STRING,
+              allowNull: false,
+              defaultValue: '---',
+            },
     area: {
-      type: DataTypes.STRING
+      type: DataTypes.FLOAT,
+      // defaultValue: 0,
     },
     population: {
-      type: DataTypes.INTEGER
+      type: DataTypes.FLOAT
     }
-  });
+   },
+   {timestamps: false
+  } 
+  );
 };
+
