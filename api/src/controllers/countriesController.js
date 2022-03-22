@@ -1,9 +1,25 @@
 const { Activity, Country, Op } = require('../db');
-const axios = require('axios');
+const responseAPI = require('../utils/index');  
+
 
 const getAllCountries = async (req, res, next) => {
     try {
-        
+        const myInformationDb = await responseAPI();
+        // await Country.findAll({
+            
+        //     attributes: ["continent", "flag"],
+        //     // through: {
+        //         //     attributes: []
+        //         // } 
+                
+        //         // where: {
+        //             //   name: {
+        //                 //     [Op.iLike]: `%${name}%`,
+        //                 //   }
+        //                 // }
+        //             });
+                    console.log(myInformationDb);
+          return res.json(myInformationDb)
     } catch (error) {
         next (error);
     };
