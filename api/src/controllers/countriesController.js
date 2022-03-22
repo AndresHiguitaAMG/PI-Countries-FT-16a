@@ -9,7 +9,7 @@ const getAllCountries = async (req, res, next) => {
     };
 };
 
-const getCiuntriesById = async (req, res, next) => {
+const getCountriesById = async (req, res, next) => {
     try {
         
     } catch (error) {
@@ -19,5 +19,5 @@ const getCiuntriesById = async (req, res, next) => {
 
 module.exports = {
     getAllCountries,
-    getCiuntriesById,
+    getCountriesById,
 };
