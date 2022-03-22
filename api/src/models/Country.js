@@ -13,12 +13,11 @@ module.exports = (sequelize) => {
       validate: {
         len: [3],
       },
-      primaryKey: true,
+      primaryKey: true
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
-      // defaultValue: '---',
+      allowNull: false
     },
     flag: {
       type: DataTypes.STRING,
@@ -26,21 +25,17 @@ module.exports = (sequelize) => {
     },
     continent: {
       type: DataTypes.STRING,
-      allowNull: false,
-      // defaultValue: '---',
+      allowNull: false
     },
     subregión: {
-      type: DataTypes.STRING,
-      // defaultValue: '---',
+      type: DataTypes.STRING
     },
     capital: {
-              type: DataTypes.STRING,
-              allowNull: false,
-              defaultValue: '---',
-            },
-    area: {
-      type: DataTypes.FLOAT,
-      // defaultValue: 0,
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+      area: {
+      type: DataTypes.FLOAT
     },
     population: {
       type: DataTypes.FLOAT
