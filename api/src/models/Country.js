@@ -7,9 +7,9 @@ module.exports = (sequelize) => {
     id: {  
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        isAlpha: true,
-      },
+      // validate: {
+      //   isAlpha: true,
+      // },
       validate: {
         len: [3],
       },
