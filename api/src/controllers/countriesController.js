@@ -16,21 +16,33 @@ const getAllCountries = async (req, res, next) => {
                         [Op.iLike]: `%${name}%`
                     }
                 },
-                include: Activity
+                include: {
+                    model: Activity,
+                    attributes: ["id", "name", "difficulty", "duration", "season"],
+                    through: {
+                        attributes: []
+                    }
+                }
             });
             allData = responseByName;
         } else {
             const myInformationDb = await Country.findAll({
                 attributes: ["flag", "name", "continent", "id"],
                 through: {
-                    attributes: ["id", "name", "difficulty", "duration", "season"]
+                    attributes: []
                 },
-                include: Activity
+                include: {
+                    model: Activity,
+                    attributes: ["id", "name", "difficulty", "duration", "season"],
+                    through: {
+                        attributes: []
+                    }
+                }
             });
             allData = myInformationDb;
         }
         if (allData.length === 0) {
-            return res.status(404).json({message: "Not Found"});
+            return res.status(404).json({message: "Not found"});
         }
         return res.json(allData);
     } catch (error) {
@@ -48,8 +60,14 @@ const getCountriesById = async (req, res, next) => {
                         [Op.iLike]: `%${id}%`
                     }
                 },
-                include: Activity
-            })
+                include: {
+                    model: Activity,
+                    attributes: ["id", "name", "difficulty", "duration", "season"],
+                    through: {
+                        attributes: []
+                    }
+                }
+            });
             const countriesbyId = {
                 id: dB.id,
                 flag: dB.flag,
