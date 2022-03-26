@@ -9,7 +9,7 @@ const getAllCountries = async (req, res, next) => {
             const responseByName = await Country.findAll({
                 attributes: ["flag", "name", "continent", "id"],
                 through: {
-                    attributes: []
+                    attributes: ["id", "name", "difficulty", "duration", "season"]
                 },
                 where: {
                     name: {
@@ -23,7 +23,7 @@ const getAllCountries = async (req, res, next) => {
             const myInformationDb = await Country.findAll({
                 attributes: ["flag", "name", "continent", "id"],
                 through: {
-                    attributes: []
+                    attributes: ["id", "name", "difficulty", "duration", "season"]
                 },
                 include: Activity
             });

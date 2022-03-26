@@ -10,7 +10,7 @@ const responseAPI = async () => {
                 flag: c.flags[1],
                 id: c.cca3,
                 continent: c.region,
-                capital: c.capital &&c.capital[0],
+                capital: c.capital ? c.capital[0] : "Not found",
                 subregión: c.subregion,
                 area: c.area,
                 population: c.population
@@ -26,6 +26,5 @@ const responseAPI = async () => {
         console.log(error);
     }
 }
-
 
 module.exports = responseAPI;
