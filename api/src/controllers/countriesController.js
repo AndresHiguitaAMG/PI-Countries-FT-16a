@@ -9,37 +9,29 @@ const getAllCountries = async (req, res, next) => {
             const responseByName = await Country.findAll({
                 attributes: ["flag", "name", "continent", "id"],
                 through: {
-                    attributes: ["id", "name", "difficulty", "duration", "season"]
+                    attributes: []
                 },
                 where: {
                     name: {
                         [Op.iLike]: `%${name}%`
                     }
-                },
-                include: {
-                    model: Activity,
-                    attributes: ["id", "name", "difficulty", "duration", "season"],
-                    through: {
-                        attributes: []
-                    }
                 }
             });
-            allData = responseByName;
+            allData = responseByName
         } else {
             const myInformationDb = await Country.findAll({
                 attributes: ["flag", "name", "continent", "id"],
                 through: {
                     attributes: []
-                },
-                include: {
-                    model: Activity,
-                    attributes: ["id", "name", "difficulty", "duration", "season"],
-                    through: {
-                        attributes: []
-                    }
                 }
             });
-            allData = myInformationDb;
+            const pra = await Activity.findAll({
+                attributes: ["id", "name", "difficulty", "duration", "season"],
+                through: {
+                    attributes: []
+                }
+            });
+            allData = myInformationDb.concat(pra);
         }
         if (allData.length === 0) {
             return res.status(404).json({message: "Not found"});
@@ -53,35 +45,26 @@ const getAllCountries = async (req, res, next) => {
 const getCountriesById = async (req, res, next) => {
     try {
         const { id } = req.params;
+        let allDataById = []
         if (id) {
-            const dB = await Country.findOne({
+            const DBCountries = await Country.findOne({
                 where: {
                     id: {
                         [Op.iLike]: `%${id}%`
                     }
-                },
-                include: {
-                    model: Activity,
-                    attributes: ["id", "name", "difficulty", "duration", "season"],
-                    through: {
-                        attributes: []
-                    }
                 }
             });
-            const countriesbyId = {
-                id: dB.id,
-                flag: dB.flag,
-                name: dB.name,
-                continent: dB.continent,
-                capital: dB.capital,
-                subregión: dB.subregión,
-                area: dB.area,
-                population: dB.population
-            }
-            if (!dB) {
+            const DBActivity = await Activity.findAll({
+                attributes: ["id", "name", "difficulty", "duration", "season"],
+                through: {
+                    attributes: []
+                }
+            })
+            allDataById = [DBCountries, ...DBActivity]
+            if (allDataById === 0) {
                 return res.status(404).json({message: "Not Found"});
             }
-            return res.json(countriesbyId);
+            return res.json(allDataById);
         }
     } catch (error) {
         next (error);
