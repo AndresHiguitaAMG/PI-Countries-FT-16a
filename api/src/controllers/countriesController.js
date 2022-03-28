@@ -61,11 +61,9 @@ const getCountriesById = async (req, res, next) => {
                 }
             })
             allDataById = [DBCountries, ...DBActivity]
-            if (allDataById === 0) {
-                return res.status(404).json({message: "Not Found"});
-            }
-            return res.json(allDataById);
+            console.log(allDataById);
         }
+        return res.json(allDataById)        
     } catch (error) {
         next (error);
     };
