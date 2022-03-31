@@ -7,7 +7,7 @@ const responseAPI = async () => {
         const myInformation = allInformationAPI.map(async c => {
             const inDb = {
                 name: c.name.common,
-                flag: c.flags[1],
+                flag: c.flags[0],
                 id: c.cca3,
                 continent: c.region,
                 capital: c.capital ? c.capital[0] : "Not found",
