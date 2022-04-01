@@ -21,7 +21,7 @@ const Detail = (props) => {
         <div>
             {/* <button onClick={handleGoToBack}>To return◀</button> */}
 
-            {
+            {/* {
                 countries.name ?
                 <div className= "container-detail">
                     <div className = "tarjeta">
@@ -45,7 +45,8 @@ const Detail = (props) => {
                 :
 
                 <div>Loading</div>
-            }
+            } */}
+            <h1>Hola</h1>
         </div>
     );
 }

@@ -1,10 +1,11 @@
 import {
-    GET_ALL_COUNTRIES, GET_COUNTRIES_BY_ID
+    GET_ALL_COUNTRIES, SET_NAME, GET_COUNTRIES_BY_ID
 } from '../action/index';
 
 const initialState = {
     allCountries: [],
-    countries: []
+    countries: [],
+    name: "",
 }
 
 export const reducer = (state = initialState, action) => {
@@ -13,8 +14,14 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 allCountries: action.payload,
-                coutries: action.payload
+                countries: action.payload
             }
+
+        case SET_NAME:
+                return{
+                    ...state,
+                    name: action.payload
+                }    
 
         case GET_COUNTRIES_BY_ID:
             return {
