@@ -3,7 +3,7 @@ const { Activity, Country, Op } = require('../db');
 
 const getAllCountries = async (req, res, next) => {
     try {
-        const { name } = req.query;
+        let { name } = req.query;
         let allData = [];
         if (name) {
             const responseByName = await Country.findAll({
@@ -25,13 +25,7 @@ const getAllCountries = async (req, res, next) => {
                     attributes: []
                 }
             });
-            const pra = await Activity.findAll({
-                attributes: ["id", "name", "difficulty", "duration", "season"],
-                through: {
-                    attributes: []
-                }
-            });
-            allData = myInformationDb.concat(pra);
+            allData = myInformationDb;
         }
         if (allData.length === 0) {
             return res.status(404).json({message: "Not found"});
