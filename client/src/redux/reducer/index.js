@@ -1,10 +1,12 @@
 import {
-    GET_ALL_COUNTRIES, GET_BY_NAME, GET_COUNTRIES_BY_ID
+    GET_ALL_COUNTRIES, GET_BY_NAME, GET_COUNTRIES_BY_ID, POST_ACTIVITIES, SET_ORDER
 } from '../action/index';
 
 const initialState = {
     allCountries: [],
     countries: [],
+    activities: [],
+    order: ""
 }
 
 export const reducer = (state = initialState, action) => {
@@ -26,6 +28,18 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 countries: action.payload
+            }
+
+        case POST_ACTIVITIES:
+            return {
+                ...state,
+                activities: action.payload
+            }
+            
+        case SET_ORDER:
+            return {
+                ...state,
+                order: action.payload
             }    
         default:
             return state;

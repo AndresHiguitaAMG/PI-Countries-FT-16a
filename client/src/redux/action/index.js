@@ -2,10 +2,12 @@ import axios from 'axios';
 export const GET_ALL_COUNTRIES = 'GET_ALL_COUNTRIES';
 export const GET_BY_NAME = 'GET_BY_NAME';
 export const GET_COUNTRIES_BY_ID = 'GET_COUNTRIES_BY_ID';
+export const POST_ACTIVITIES = "POST_ACTIVITIES";
+export const SET_ORDER = 'SET_ORDER';
 
-export const getAllCountries = () => {
+export const getAllCountries = (order) => {
     return (dispatch) => {
-        axios.get("http://localhost:3001/countries")
+        axios.get(`http://localhost:3001/countries?order=${order ? order : ""}`)
         .then(informationBack => {
             return dispatch ({
                 type: GET_ALL_COUNTRIES,
@@ -44,5 +46,22 @@ export const getCountriesById = (id) => {
         } catch (error) {
             console.log(error);
         }
+    }
+}
+
+export const postActivities = (payload) => {
+    return async function (dispatch) {
+        const inputUser = await axios.post("http://localhost:3001/countries/create", payload);
+        return dispatch ({
+            type: POST_ACTIVITIES,
+            inputUser
+        });
+    };
+};
+
+export const setOrder = (order) => {
+    return {
+        type: 'SET_ORDER',
+        payload: order
     }
 }

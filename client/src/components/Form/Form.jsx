@@ -8,13 +8,53 @@ const Form = () => {
         difficulty: "",
         duration: "",
         season: "",
+        countries: []
     });
 
     
 
 
   return (
-    <div>Form</div>
+    <div>
+      <div>
+        <h1>Create</h1>
+      </div>
+
+      <div>
+        <label>Name: </label>
+        <input 
+        type={"text"}
+        placeholder={"name"}
+        name={"name"}
+
+        />
+
+        <label>Difficulty: </label>
+        <input 
+        type={"number"}
+        min="1" 
+        max="5"
+        placeholder={"difficulty"}
+        name={"name"}
+        />
+
+        <label>Duration: </label>
+        <input 
+        type={"number"}
+        min="1" 
+        max="8"
+        placeholder={"duration"}
+        name={"name"}
+        />
+
+        <label>Season: </label>
+        <input 
+        type={"number"}
+        placeholder={"duration"}
+        name={"name"}
+        />
+      </div>
+    </div>
   )
 }
 
