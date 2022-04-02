@@ -1,6 +1,6 @@
 import { React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
+// import useHistory from 'react-router-dom';
 import { getCountriesById } from '../../redux/action';
 
 const Detail = (props) => {
@@ -17,6 +17,7 @@ const Detail = (props) => {
     // const handleGoToBack = () => {
     //     history.goBack();
     // }
+
     return (
         <div>
             {/* <button onClick={handleGoToBack}>To return◀</button> */}
