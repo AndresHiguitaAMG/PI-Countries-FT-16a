@@ -1,11 +1,11 @@
 import axios from 'axios';
 export const GET_ALL_COUNTRIES = 'GET_ALL_COUNTRIES';
-export const SET_NAME = 'SET_NAME';
+export const GET_BY_NAME = 'GET_BY_NAME';
 export const GET_COUNTRIES_BY_ID = 'GET_COUNTRIES_BY_ID';
 
-export const getAllCountries = (name) => {
+export const getAllCountries = () => {
     return (dispatch) => {
-        axios.get(`http://localhost:3001/countries?name=${name ? name: ""}`)
+        axios.get("http://localhost:3001/countries")
         .then(informationBack => {
             return dispatch ({
                 type: GET_ALL_COUNTRIES,
@@ -18,10 +18,17 @@ export const getAllCountries = (name) => {
     };
 }; 
 
-export const setName = (name) => {
-    return {
-        type: SET_NAME,
-        payload: name
+export const getByName = (name) => {
+    return async function (dispatch) {
+        try {
+            const byName = await axios.get("http://localhost:3001/countries?name=" + name);
+            return dispatch ({
+                type: GET_BY_NAME,
+                payload: byName.data
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllCountries } from '../../redux/action';
 import Cards from '../Cards/Cards';
 import Paged from '../Paged/Paged';
+import SearchBar from '../SearchBar/SearchBar';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -23,11 +24,16 @@ const Home = () => {
 
     return (
         <div>
+
+            <div>
+                <SearchBar />
+            </div>
+            
             <div>
                 {
-                    currentCountries?.length > 0 ?
-
-                    currentCountries?.length > 0 && currentCountries?.map(co => {
+                    currentCountries?.length > 0 
+                    ?
+                    currentCountries?.map(co => {
                         return <Cards flag={co.flag} name={co.name} continent={co.continent} id={co.id} key={co.id}/>
                     })
                     :

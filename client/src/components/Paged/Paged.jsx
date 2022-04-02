@@ -14,7 +14,6 @@ const Paged = ({ countriesPerPage, allCountries, totalPages }) => {
         <>
             <ul className="pageNumbers">
                 {pageNumber?.map(el =>(
-                    
                     <li key={el}>
                         <a onClick={()=> totalPages(el)}>{el}</a>
                     </li>
