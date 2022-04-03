@@ -1,7 +1,9 @@
 import {
     GET_ALL_COUNTRIES, GET_BY_NAME, GET_COUNTRIES_BY_ID, POST_ACTIVITIES, ORDER_BY_NAME,
     SET_PAGE,
-    SET_ORDER
+    SET_ORDER,
+    ORDER_BY_POPULATION,
+    // SET_RESET
 } from '../action/index';
 
 const initialState = {
@@ -9,7 +11,8 @@ const initialState = {
     countries: [],
     activities: [],
     page: 1,
-    order: ""
+    order: "",
+    // resetName: ""
 }
 
 export const reducer = (state = initialState, action) => {
@@ -50,6 +53,12 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 order: action.payload
             }
+
+        // case SET_RESET:
+        //     return {
+        //         ...state,
+        //         resetName: action.payload
+        //     }    
         
         case ORDER_BY_NAME:
             let orderAAndZ = action.payload === "asc" ?
@@ -76,7 +85,33 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 allCountries: orderAAndZ
             }
-             
+            
+        case ORDER_BY_POPULATION:
+            let orderPopulation = action.payload === "asc" ?
+            state.allCountries.sort((a, b) => {
+                if (a.population > b.population) {
+                    return 1;
+                }
+                else if (b.population > a.population) {
+                    return - 1;
+                }
+                return 0;
+            })
+            :
+            state.allCountries.sort((a, b) => {
+                if (a.population > b.population) {
+                    return - 1;
+                }
+                else if (b.population > a.population) {
+                    return 1;
+                }
+                return 0;
+            })
+            return {
+                ...state,
+                allCountries: orderPopulation
+            }
+
         default:
             return state;
     }

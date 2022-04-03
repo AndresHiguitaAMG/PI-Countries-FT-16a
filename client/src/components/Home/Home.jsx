@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllCountries } from '../../redux/action';
 import Cards from '../Cards/Cards';
 import OrderByName from '../Ordinances/OrderByName';
+import OrderByPopulation from '../Ordinances/OrderByPopulation';
 import Paged from '../Paged/Paged';
 import SearchBar from '../SearchBar/SearchBar';
 
 const Home = () => {
     const dispatch = useDispatch();
     const { allCountries } = useSelector(state => state);
-    const [ setOrderName ] = useState("")
     const [currentPage, setCurrentPage] = useState(1);
     const [countriesPerPage] = useState(9);
     const indexLastCountries = currentPage * countriesPerPage;
@@ -32,10 +32,11 @@ const Home = () => {
             </div>
 
             <div>
-                <OrderByName 
-                setOrderName={setOrderName} 
-                setCurrentPage={setCurrentPage}
-                />
+                <OrderByName />
+            </div>
+
+            <div>
+                <OrderByPopulation />
             </div>
             
             <div>

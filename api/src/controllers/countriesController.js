@@ -7,7 +7,7 @@ const getAllCountries = async (req, res, next) => {
         let allData = [];
         if (name) {
             const responseByName = await Country.findAll({
-                attributes: ["flag", "name", "continent", "id"],
+                attributes: ["flag", "name", "continent", "id", "population"],
                 through: {
                     attributes: []
                 },
@@ -20,7 +20,7 @@ const getAllCountries = async (req, res, next) => {
             allData = responseByName
         } else {
             const myInformationDb = await Country.findAll({
-                attributes: ["flag", "name", "continent", "id"],
+                attributes: ["flag", "name", "continent", "id", "population"],
                 through: {
                     attributes: []
                 }
