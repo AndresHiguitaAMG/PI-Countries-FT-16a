@@ -3,7 +3,7 @@ const { Activity, Country, Op } = require('../db');
 
 const getAllCountries = async (req, res, next) => {
     try {
-        let { name, order } = req.query;
+        let { name } = req.query;
         let allData = [];
         if (name) {
             const responseByName = await Country.findAll({
@@ -27,17 +27,6 @@ const getAllCountries = async (req, res, next) => {
             });
             allData = myInformationDb;
         }
-        //#region order
-        if (order === "asc") {
-            allData = allData.sort((a, b) => {
-                return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-            });
-        } else {
-            allData = allData.sort((a, b) => {
-                return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
-            })
-        }
-        //#endregion
         if (allData.length === 0) {
             return res.status(404).json({message: "Not found"});
         }

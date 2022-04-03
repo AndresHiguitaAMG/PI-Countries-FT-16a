@@ -3,11 +3,14 @@ export const GET_ALL_COUNTRIES = 'GET_ALL_COUNTRIES';
 export const GET_BY_NAME = 'GET_BY_NAME';
 export const GET_COUNTRIES_BY_ID = 'GET_COUNTRIES_BY_ID';
 export const POST_ACTIVITIES = "POST_ACTIVITIES";
+export const ORDER_BY_NAME = 'ORDER_BY_NAME';
+export const SET_PAGE = 'SET_PAGE';
 export const SET_ORDER = 'SET_ORDER';
 
-export const getAllCountries = (order) => {
+
+export const getAllCountries = () => {
     return (dispatch) => {
-        axios.get(`http://localhost:3001/countries?order=${order ? order : ""}`)
+        axios.get("http://localhost:3001/countries")
         .then(informationBack => {
             return dispatch ({
                 type: GET_ALL_COUNTRIES,
@@ -59,9 +62,23 @@ export const postActivities = (payload) => {
     };
 };
 
-export const setOrder = (order) => {
+export const setPage = (payload) => {
     return {
-        type: 'SET_ORDER',
+        type: SET_PAGE,
+        payload
+    }
+}
+
+export const setOrder = (payload) => {
+    return {
+        type: SET_ORDER,
+        payload
+    }
+}
+
+export const orderByName = (order) => {
+    return {
+        type: ORDER_BY_NAME,
         payload: order
     }
 }

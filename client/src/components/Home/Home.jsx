@@ -9,6 +9,7 @@ import SearchBar from '../SearchBar/SearchBar';
 const Home = () => {
     const dispatch = useDispatch();
     const { allCountries } = useSelector(state => state);
+    const [ setOrderName ] = useState("")
     const [currentPage, setCurrentPage] = useState(1);
     const [countriesPerPage] = useState(9);
     const indexLastCountries = currentPage * countriesPerPage;
@@ -31,7 +32,10 @@ const Home = () => {
             </div>
 
             <div>
-                <OrderByName />
+                <OrderByName 
+                setOrderName={setOrderName} 
+                setCurrentPage={setCurrentPage}
+                />
             </div>
             
             <div>

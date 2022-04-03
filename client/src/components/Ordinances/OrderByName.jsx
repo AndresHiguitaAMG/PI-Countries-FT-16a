@@ -1,13 +1,15 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { getAllCountries, setOrder } from '../../redux/action';
+import { orderByName, setOrder, setPage } from '../../redux/action';
 
 const OrderByName = () => {
     const dispatch = useDispatch();
+    
 
     const handleSelectName = (e) => {
-        dispatch(setOrder(e.target.value));
-        dispatch(getAllCountries({order: e.target.value}));
+        dispatch(orderByName(e.target.value));
+        dispatch(setPage(1))
+        dispatch(setOrder(`order ${e.target.value}`))
     }
 
   return (
