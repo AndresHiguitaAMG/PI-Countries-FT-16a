@@ -5,7 +5,6 @@ import { orderByName, setOrder, setPage } from '../../redux/action';
 const OrderByName = () => {
     const dispatch = useDispatch();
     
-
     const handleSelectName = (e) => {
         dispatch(orderByName(e.target.value));
         dispatch(setPage(1));

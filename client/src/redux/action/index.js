@@ -8,6 +8,7 @@ export const ORDER_BY_POPULATION = 'ORDER_BY_POPULATION';
 export const SET_PAGE = 'SET_PAGE';
 export const SET_ORDER = 'SET_ORDER';
 // export const SET_RESET = 'SET_RESET';
+export const FILTER_BY_CONTINENT = 'FILTER_BY_CONTINENT';
 
 
 
@@ -79,19 +80,26 @@ export const setOrder = (payload) => {
     }
 }
 
-export const orderByName = (order) => {
+export const orderByName = (name) => {
     return {
         type: ORDER_BY_NAME,
-        payload: order
+        payload: name
     }
 }
 
-export const orderByPopulation = (order) => {
+export const orderByPopulation = (population) => {
     return {
         type: ORDER_BY_POPULATION,
-        payload: order
+        payload: population
     };
 };
+
+export const FilterByContinent = (continent) => {
+    return {
+        type: FILTER_BY_CONTINENT,
+        payload: continent
+    }
+} 
 
 // export const setReset = () => {
 //     return {

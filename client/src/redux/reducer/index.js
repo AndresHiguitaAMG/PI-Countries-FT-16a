@@ -3,6 +3,7 @@ import {
     SET_PAGE,
     SET_ORDER,
     ORDER_BY_POPULATION,
+    FILTER_BY_CONTINENT,
     // SET_RESET
 } from '../action/index';
 
@@ -111,6 +112,14 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 allCountries: orderPopulation
             }
+
+        case FILTER_BY_CONTINENT:
+            const countries = state.countries;
+            const change = action.payload === "All" ? countries : countries.filter(con => con.continent === action.payload)
+            return {
+                ...state,
+                allCountries: change
+            }     
 
         default:
             return state;
