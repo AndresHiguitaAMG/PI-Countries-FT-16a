@@ -10,7 +10,7 @@ import {
 const initialState = {
     allCountries: [],
     countries: [],
-    activities: [],
+    // activities: [],
     page: 1,
     order: "",
     // resetName: ""
@@ -40,7 +40,7 @@ export const reducer = (state = initialState, action) => {
         case POST_ACTIVITIES:
             return {
                 ...state,
-                activities: action.payload
+                // activities: action.payload
             }
 
         case SET_PAGE:
