@@ -9,9 +9,13 @@ const postActivities = async (req, res, next) => {
         duration,
         season,
       });
-      countries.map(async pr => {
-        await newActivity.addCountries(await Country.findByPk(pr));
+      const countriesIn = await Country.findAll({
+        where: {
+          name: countries
+        }
       });
+      console.log(countriesIn);
+      newActivity.addCountry(countriesIn)
       return res.json(newActivity);
     } catch (error) {
       next (error);
