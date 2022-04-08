@@ -1,5 +1,6 @@
 const { Activity, Country } = require('../db');
 
+//Mi función para crear una nueva actividad
 const postActivities = async (req, res, next) => {
     try {
       const { name, difficulty, duration, season, countries  } = req.body

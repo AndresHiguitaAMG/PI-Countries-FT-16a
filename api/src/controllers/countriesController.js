@@ -1,6 +1,6 @@
 const { Activity, Country, Op } = require('../db');
 
-
+//Mi función para traerme todos los paises y también para traermelos por nombre
 const getAllCountries = async (req, res, next) => {
     try {
         let { name } = req.query;
@@ -36,6 +36,7 @@ const getAllCountries = async (req, res, next) => {
     };
 };
 
+//Mi función para traerme los paises por id
 const getCountriesById = async (req, res, next) => {
     try {
         const { id } = req.params;

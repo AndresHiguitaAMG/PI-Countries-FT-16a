@@ -9,7 +9,7 @@ export const SET_PAGE = 'SET_PAGE';
 export const SET_ORDER = 'SET_ORDER';
 // export const SET_RESET = 'SET_RESET';
 export const FILTER_BY_CONTINENT = 'FILTER_BY_CONTINENT';
-
+export const FILTER_BY_ACTIVITIES = 'FILTER_BY_ACTIVITIES';
 
 
 export const getAllCountries = () => {
@@ -100,6 +100,13 @@ export const FilterByContinent = (continent) => {
         payload: continent
     }
 } 
+
+export const filterByActivities = (payload) => {
+    return {
+        type: FILTER_BY_ACTIVITIES,
+        payload
+    }
+}
 
 // export const setReset = () => {
 //     return {

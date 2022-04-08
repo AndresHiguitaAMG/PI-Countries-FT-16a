@@ -1,6 +1,7 @@
 const axios = require('axios');
 const { Country } = require('../db');
 
+//Mi función para traerme todos la información de la API
 const responseAPI = async () => {
     try {
         const allInformationAPI = (await axios.get("https://restcountries.com/v3/all")).data;

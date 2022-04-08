@@ -7,6 +7,8 @@ const Form = () => {
     const dispatch = useDispatch();
     // const history = useHistory();
     const { allCountries } = useSelector(state => state);
+    const [ validate, setValidate ] = useState({});
+    const [error, setError] = useState(true); 
     const [ form, setForm ] = useState({
       name: "",
       difficulty: "",
@@ -19,36 +21,48 @@ const Form = () => {
       dispatch(getAllCountries());
     }, [dispatch]);
 
+    const validation = (form) => {
+      let validations = {};
+      let regexName = /^[A-Z]+$/i;
+      if (!form.name.trim()) {
+        validations.name = "The name field is required"
+      }
+      else if (!regexName.test(form.name.trim())) {
+        validations.name = "The name field only accepts letters";
+      }
+      if (!form.name.trim()) {
+        validations.difficulty = "The difficulty field is required"
+      }
+      if (!form.duration.trim()) {
+        validations.duration = "The duration field is required"
+      }
+      return validations;
+    }
+
     const handleOnchangeActivity = (e) => {
       setForm({
         ...form,
         [e.target.name]: e.target.value
       });
+      setValidate(validation({
+        ...form,
+        [e.target.name]: e.target.value
+      }));
     };
 
     const handleSelectCountries = (e) => {
-    //   if (form.AllCountries.includes(e.target.value)) {
-    //     alert("You already select that country.")
-    // } else {
-        
-    
-      // const selectCountries = form.countries.find(el => el === e.target.value)
-      // if (selectCountries) return
       setForm({
-          ...form, 
-          countries: [...form.countries, e.target.value]
-      }) 
-  }
+        ...form,
+        countries: [...form.countries, e.target.value]
+      });
+    };
 
-  // const handleSelectSeason = (e) => {
-  //   const selectSeason = form.season.find(el => el === e.target.value)
-  //     if (selectSeason)
-  //     return
-  //   setForm({
-  //     ...form,
-  //     season: [...form.season, e.target.value]
-  //   })
-  // }
+  const handleSelectSeason = (e) => {
+    setForm({
+      ...form,
+      season: e.target.value
+    });
+  };
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -64,6 +78,19 @@ const Form = () => {
     })
     // history.push('/home')
   }
+
+  useEffect (() => {
+    if (form.name.length > 0 && form.difficulty.length > 0 && form.duration.length > 0 && form.season.length > 0 && form.countries.length > 0) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+  }, [form, setError]);
+
+  let styles = {
+    fontWeight: "bold",
+    color: "#dc3545",
+  };
 
   return (
     <div>
@@ -81,6 +108,7 @@ const Form = () => {
       value={form.name}
       onChange={handleOnchangeActivity}
       />
+      {validate.name && <p style={styles}>{validate.name}</p>}
     </div>
 
     <div>
@@ -94,6 +122,7 @@ const Form = () => {
       value={form.difficulty}
       onChange={handleOnchangeActivity}
       />
+      {validate.difficulty && <p style={styles}>{validate.difficulty}</p>}
     </div>
 
     <div>
@@ -107,11 +136,12 @@ const Form = () => {
       value={form.duration}
       onChange={handleOnchangeActivity}
       />
+      {validate.duration && <p style={styles}>{validate.duration}</p>}
     </div>
 
     <div>
     {/* <label>Season: </label> */}
-    <select onChange={handleOnchangeActivity}>
+    <select name={"season"} onChange={handleSelectSeason}>
       <option value={""}>-- Select season --</option>
       <option value={"summer"}>Summer</option>
       <option value={"autumn"}>Autumn</option>
@@ -119,14 +149,11 @@ const Form = () => {
       <option value={"spring"}>Spring</option>
       <option value={"fall"}>Fall</option>
     </select>
-    {/* <ul>
-      <li>{form.season.map(el => el + ", ")}</li>
-    </ul> */}
     </div>
 
     <div>
       {/* <label>Countries: </label> */}
-      <select onChange={(e) => handleSelectCountries(e)}>
+      <select name={"countries"} onChange={(e) => handleSelectCountries(e)}>
         <option value={""}>-- Select countries --</option>
         {
         allCountries.map(coun => (
@@ -140,7 +167,8 @@ const Form = () => {
         </div>
         <div>
           <button 
-          type='submit'
+          type={"submit"}
+          disabled = {error}
           >Create</button>
         </div>
       </form>
