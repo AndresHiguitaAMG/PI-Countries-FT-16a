@@ -4,12 +4,16 @@ import {
     SET_ORDER,
     ORDER_BY_POPULATION,
     FILTER_BY_CONTINENT,
+    FILTER_BY_ACTIVITIES,
+    // SET_FILTER,
+    // SET_FILTER,
     // SET_RESET
 } from '../action/index';
 
 const initialState = {
     allCountries: [],
     countries: [],
+    detail: [],
     // activities: [],
     page: 1,
     order: "",
@@ -34,13 +38,12 @@ export const reducer = (state = initialState, action) => {
         case GET_COUNTRIES_BY_ID:
             return {
                 ...state,
-                countries: action.payload
+                detail: action.payload
             }
 
         case POST_ACTIVITIES:
             return {
-                ...state,
-                // activities: action.payload
+                ...state
             }
 
         case SET_PAGE:
@@ -119,7 +122,31 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 allCountries: change
-            }     
+            }
+            
+        case FILTER_BY_ACTIVITIES:
+            const countriesAll = state.countries;
+            const filterActivities = countriesAll.reduce((acomulador, actual) => {
+                let activityId = actual.activities.map(i => i.id);
+                if (activityId.includes(parseInt(action.payload))) {
+                    acomulador.push(actual);
+                }
+                return acomulador;
+            }, []);
+            return {
+                ...state,
+                allCountries: filterActivities
+            }
+            
+        // case SET_FILTER:
+        //     const filterA = state.activities;
+        //     const filterB = filterA.reduce((acomulador, actual ) => {
+        //         let activId = actual.a
+        //     }) 
+        //     return {
+        //         ...state,
+        //         allCountries: action.payload
+        //     }    
 
         default:
             return state;

@@ -10,17 +10,42 @@ const postActivities = async (req, res, next) => {
         duration,
         season,
       });
-      const countriesIn = await Country.findAll({
-        where: {
-          name: countries
-        }
-      });
-      console.log(countriesIn);
-      newActivity.addCountry(countriesIn)
+      console.log(countries);
+      countries.forEach(async c => {
+        const countriesIn = await Country.findAll({
+          where: {
+            name: c
+          }
+        });
+        console.log(countriesIn);
+        newActivity.addCountry(countriesIn)
+      })
+
       return res.json(newActivity);
     } catch (error) {
       next (error);
     };
   };
 
-module.exports = postActivities;
+  const getAcitivities = async (req, res, next) => {
+    try {
+      const showActivities = await Activity.findAll({
+        include: {
+          model: Country,
+          attributes: ["name", "id"],
+          through: {
+              attributes: []
+          }
+        }
+      })
+      console.log(showActivities);
+      return res.json(showActivities)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+module.exports = {
+  postActivities,
+  getAcitivities
+};

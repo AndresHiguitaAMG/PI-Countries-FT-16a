@@ -10,6 +10,7 @@ export const SET_ORDER = 'SET_ORDER';
 // export const SET_RESET = 'SET_RESET';
 export const FILTER_BY_CONTINENT = 'FILTER_BY_CONTINENT';
 export const FILTER_BY_ACTIVITIES = 'FILTER_BY_ACTIVITIES';
+// export const SET_FILTER = 'SET_FILTER';
 
 
 export const getAllCountries = () => {
@@ -45,7 +46,7 @@ export const getCountriesById = (id) => {
     return async function (dispatch) {
         try {
             const detailAPI = await axios.get(`http://localhost:3001/countries/${id}`)
-            console.log(detailAPI);
+            console.log(detailAPI.data);
             return dispatch ({
                 type: GET_COUNTRIES_BY_ID,
                 payload: detailAPI.data
@@ -101,12 +102,35 @@ export const FilterByContinent = (continent) => {
     }
 } 
 
-export const filterByActivities = (payload) => {
+export const filterByActivities = (filterActivity) => {
     return {
         type: FILTER_BY_ACTIVITIES,
-        payload
+        payload: filterActivity
     }
 }
+
+//Action para ponerla en funcionamiento mas adelante junto con setFilter
+// export const filterByActivities = () => {
+//     return async function (dispatch) {
+//         try {
+//             const filterActivities = await axios.get("http://localhost:3001/activities");
+//             console.log(filterActivities.data);
+//             return dispatch ({
+//                 type: FILTER_BY_ACTIVITIES,
+//                 payload: filterActivities.data
+//             })
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// }
+
+// export const setFilter = (payload) => {
+//     return {
+//         type: SET_FILTER,
+//         payload
+//     }
+// }
 
 // export const setReset = () => {
 //     return {

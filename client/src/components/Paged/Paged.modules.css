@@ -3,7 +3,7 @@
     display: flex;
     justify-content:center;
     margin: 10px;
-    padding: 10px;
+    padding: 30px;
 }
 
 .pageNumbers li {
@@ -14,5 +14,5 @@
 
 .pageNumbers li.active {
     background-color: white;
-    color: black;
+    color: black; 
 }

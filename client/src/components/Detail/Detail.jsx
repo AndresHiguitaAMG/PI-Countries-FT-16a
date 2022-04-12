@@ -1,55 +1,70 @@
-import { React, useEffect } from 'react';
+import { React, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-// import useHistory from 'react-router-dom';
 import { getCountriesById } from '../../redux/action';
 
 const Detail = (props) => {
-    const dispatch = useDispatch();
-    // const history = useHistory();
-    const countries = useSelector(state => state.countries);
-    console.log(countries);
-    const { id } = props.match.params;
+  const dispatch = useDispatch();
+  // const { id } = props.match.params;
+  const { detail } = useSelector(state => state);
+  console.log(detail);
 
-    useEffect (() => {
-        dispatch(getCountriesById(id));
-    }, [dispatch, id]);
+  useEffect (() => {
+    dispatch(getCountriesById(props.match.params.id));
+  }, [dispatch, props]);
 
-    // const handleGoToBack = () => {
-    //     history.goBack();
-    // }
 
-    return (
-        <div>
-            {/* <button onClick={handleGoToBack}>To return◀</button> */}
 
-            {/* {
-                countries.name ?
+  return (
+    <div>
+         {/* <button onClick={handleGoToBack}>To return◀</button> */}
+
+            {
+                detail.length > 0 ?
                 <div className= "container-detail">
                     <div className = "tarjeta">
                         <div className = "tarjeta-image">
-                            <img src={countries.flag} alt="img not found" width="400px" heigth="290px"/>
+                            <img src={detail[0].flag} alt="img not found" width="350px" heigth="290px"/>
                         </div>
                         
                         <div tajeta-text>
-                            <h3>{countries.name}</h3>
-                        
-                        
-                        
-                            <p>Genres: {countries.continent}</p>
-                    
-                            
+                            <h3>{detail[0].name}</h3>
                         </div>
+
+                        <div>
+                          {detail[0].capital}
+                        </div>
+                        
+                        <div>
+                            <p>{detail[0].continent}</p>
+                        </div>
+
+                        <div>
+                          <p>{detail[0].subregión}</p>
+                        </div>
+                        
+                        <div>
+                          <p>{detail[0].area}</p>
+                        </div>
+
+                        <div>
+                          <p>{detail[0].population}</p>
+                        </div>
+
+
+
+                        
+                        
+                        
+
+                            
                         
                     </div>  
                 </div>
-
                 :
-
                 <div>Loading</div>
-            } */}
-            <h1>Hola</h1>
-        </div>
-    );
+            }
+    </div>
+  )
 }
- 
+
 export default Detail;

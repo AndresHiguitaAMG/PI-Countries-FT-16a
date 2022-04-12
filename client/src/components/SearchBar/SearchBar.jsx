@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getByName } from '../../redux/action';
+import './SearchBar.modules.css';
 
 const SearchBar = () => {
     const dispatch = useDispatch();
@@ -17,17 +18,21 @@ const SearchBar = () => {
     };
 
     return (
-        <div>
+        <div className='content'>
             <div>
                 <input
                 type={"text"}
                 placeholder={"Search..."}
                 onChange={handleOnchage}
                 />
-                <button 
+            </div>
+            
+            <div className='sub'>
+                <button
                 type={'submit'} 
-                onClick={handleOnSubmit}
-                >Search🔍</button>
+                onClick={handleOnSubmit}>
+                Search🔍
+                </button>
             </div>
         </div>
     )

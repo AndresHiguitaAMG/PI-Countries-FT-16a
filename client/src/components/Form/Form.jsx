@@ -1,11 +1,10 @@
 import { React, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-// import { useHistory } from 'react-router';
 import { getAllCountries, postActivities } from '../../redux/action';
+import './Form.modules.css';
 
 const Form = () => {
     const dispatch = useDispatch();
-    // const history = useHistory();
     const { allCountries } = useSelector(state => state);
     const [ validate, setValidate ] = useState({});
     const [error, setError] = useState(true); 
@@ -75,9 +74,8 @@ const Form = () => {
       duration: "",
       season: "",
       countries: []
-    })
-    // history.push('/home')
-  }
+    });
+  };
 
   useEffect (() => {
     if (form.name.length > 0 && form.difficulty.length > 0 && form.duration.length > 0 && form.season.length > 0 && form.countries.length > 0) {
@@ -94,13 +92,14 @@ const Form = () => {
 
   return (
     <div>
-      <form onSubmit={handleOnSubmit}>
       <div>
-        <h1>Create</h1>
+        <h2>Create</h2>
     </div>
+    <main>
+      <form onSubmit={handleOnSubmit}>
     
-    <div>
-      <label>Name: </label>
+    <div className='field'>
+      <label>Name</label>
       <input
       type={"text"}
       placeholder={"name"}
@@ -111,8 +110,8 @@ const Form = () => {
       {validate.name && <p style={styles}>{validate.name}</p>}
     </div>
 
-    <div>
-      <label>Difficulty: </label>
+    <div className='field'>
+      <label>Difficulty</label>
       <input 
       type={"number"}
       min="1" 
@@ -125,8 +124,8 @@ const Form = () => {
       {validate.difficulty && <p style={styles}>{validate.difficulty}</p>}
     </div>
 
-    <div>
-      <label>Duration: </label>
+    <div className='field'>
+      <label>Duration</label>
       <input 
       type={"number"}
       min="1" 
@@ -139,10 +138,10 @@ const Form = () => {
       {validate.duration && <p style={styles}>{validate.duration}</p>}
     </div>
 
-    <div>
-    {/* <label>Season: </label> */}
+    <div className='field'>
+    <label>Season</label>
     <select name={"season"} onChange={handleSelectSeason}>
-      <option value={""}>-- Select season --</option>
+      <option value={""} selected disabled>-- Select season --</option>
       <option value={"summer"}>Summer</option>
       <option value={"autumn"}>Autumn</option>
       <option value={"winter"}>Winter</option>
@@ -151,10 +150,10 @@ const Form = () => {
     </select>
     </div>
 
-    <div>
-      {/* <label>Countries: </label> */}
+    <div className='field'>
+      <label>Countries</label>
       <select name={"countries"} onChange={(e) => handleSelectCountries(e)}>
-        <option value={""}>-- Select countries --</option>
+        <option value={""} selected disabled>-- Select countries --</option>
         {
         allCountries.map(coun => (
         <option key={coun.id} value={coun.name}>{coun.name}</option>
@@ -165,13 +164,14 @@ const Form = () => {
           <li>{form.countries.map(el => el + ", ")}</li>
         </ul>
         </div>
-        <div>
+        <div className='submit'>
           <button 
           type={"submit"}
           disabled = {error}
           >Create</button>
         </div>
       </form>
+    </main>
     </div>
   )
 }

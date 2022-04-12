@@ -23,6 +23,13 @@ const getAllCountries = async (req, res, next) => {
                 attributes: ["flag", "name", "continent", "id", "population"],
                 through: {
                     attributes: []
+                }, 
+                include: {
+                    model: Activity,
+                    attributes: ["name", "id"],
+                    through: {
+                        attributes: []
+                    } 
                 }
             });
             allData = myInformationDb;
@@ -54,6 +61,7 @@ const getCountriesById = async (req, res, next) => {
                 }
             }
         });
+        console.log(DBCountries);
         if (!DBCountries.length) {
             return res.status(404).json({message: "Not found"});
         }
