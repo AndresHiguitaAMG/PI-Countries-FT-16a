@@ -1,0 +1,24 @@
+.menu {
+    background-color: black;
+    padding: 0.7rem;
+}
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 1.0;
+}
+.menu ul li {
+    display:inline-block
+}
+.w {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 3px;
+}
+.w:hover {
+    background-color: #95c2d3;
+}
+/* .s {
+    position: absolute;
+} */

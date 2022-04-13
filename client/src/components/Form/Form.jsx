@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { getAllCountries, postActivities } from '../../redux/action';
 import './Form.modules.css';
 
@@ -56,6 +57,13 @@ const Form = () => {
       });
     };
 
+    const handleDeleteCountries = (d) => {
+      setForm({
+        ...form,
+        countries: form.countries.filter(ct => ct !== d)
+      });
+    };
+
   const handleSelectSeason = (e) => {
     setForm({
       ...form,
@@ -92,6 +100,10 @@ const Form = () => {
 
   return (
     <div>
+      <NavLink to = "/home">
+                Home
+      </NavLink>
+      
       <div>
         <h2>Create</h2>
     </div>
@@ -171,6 +183,16 @@ const Form = () => {
           >Create</button>
         </div>
       </form>
+      <div>
+        {
+          form.countries.map(d => 
+            <div>
+              <p>{d}</p>
+              <button onClick={() => handleDeleteCountries(d)}>X</button>
+            </div>
+            )
+        }
+      </div>
     </main>
     </div>
   )

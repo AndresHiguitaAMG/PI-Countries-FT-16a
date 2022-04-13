@@ -5,6 +5,7 @@ import {
     ORDER_BY_POPULATION,
     FILTER_BY_CONTINENT,
     FILTER_BY_ACTIVITIES,
+    ORDER_BY_AREA,
     // SET_FILTER,
     // SET_FILTER,
     // SET_RESET
@@ -14,7 +15,7 @@ const initialState = {
     allCountries: [],
     countries: [],
     detail: [],
-    // activities: [],
+    activities: [],
     page: 1,
     order: "",
     // resetName: ""
@@ -25,8 +26,9 @@ export const reducer = (state = initialState, action) => {
         case GET_ALL_COUNTRIES:
             return {
                 ...state,
-                allCountries: action.payload,
-                countries: action.payload
+                allCountries: action.payload[0],
+                countries: action.payload[0],
+                activities: action.payload[1]
             }
 
         case GET_BY_NAME:
@@ -43,7 +45,7 @@ export const reducer = (state = initialState, action) => {
 
         case POST_ACTIVITIES:
             return {
-                ...state
+                ...state,
             }
 
         case SET_PAGE:
@@ -115,6 +117,32 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 allCountries: orderPopulation
             }
+
+        case ORDER_BY_AREA:
+            let orderAr = action.payload === "asc" ?
+            state.allCountries.sort((a, b) => {
+                if (a.area > b.area) {
+                    return 1
+                }
+                else if (b.area > a.area) {
+                    return - 1
+                }
+                return 0
+            })
+            :
+            state.allCountries.sort((a, b) => {
+                if (a.area > b.area) {
+                    return - 1
+                }
+                else if (b.area > a.area) {
+                    return 1
+                }
+                return 0
+            })
+            return {
+                ...state,
+                allCountries: orderAr
+            }  
 
         case FILTER_BY_CONTINENT:
             const countries = state.countries;

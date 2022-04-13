@@ -11,7 +11,7 @@ const OrderByPopulation = () => {
 
   return (
     <div>
-        <span>Order By Population: </span>
+        <span>Order By Population</span>
         <select onChange={handleSelectPopulation}>
             <option value={"asc"}>-- Ascendente --</option>
             <option value={"desc"}>-- Descendente --</option>

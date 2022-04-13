@@ -22,12 +22,13 @@ form {
     padding: 3px;
     display: flex;
     flex-direction: column;
-    width: 20rem;
+    width: 40rem;
     margin: 0.5rem 0;
 }
 .field label {
+    font-weight: bold;
     font-size: 0.9rem;
-    margin-bottom: 0.2rem;
+    padding: 1px;
     color: #000000;
 }
 .field input {
@@ -38,9 +39,11 @@ form {
     border-radius: 5px;
 }
 .field select {
+   
+
     font-size: 1.1rem;
-    width: 12rem;
-    height: 2.6rem;
+    width: 30rem;
+    height: 2.2rem;
     padding-left: 0.5rem;
     border: 2px solid #000000;
     border-radius: 5px;

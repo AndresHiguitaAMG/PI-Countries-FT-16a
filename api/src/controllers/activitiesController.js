@@ -19,7 +19,7 @@ const postActivities = async (req, res, next) => {
         });
         console.log(countriesIn);
         newActivity.addCountry(countriesIn)
-      })
+      }) 
 
       return res.json(newActivity);
     } catch (error) {
@@ -41,7 +41,7 @@ const postActivities = async (req, res, next) => {
       console.log(showActivities);
       return res.json(showActivities)
     } catch (error) {
-      console.log(error);
+      next (error);
     }
   }
 
